@@ -1,856 +1,797 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+<!--[if mso]>
+<noscript>
+  <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+  </xml>
+</noscript>
+<![endif]-->
 <title>Aeroex Newsletter – Hacksmith Installation</title>
-<style>
-  @import url('https://googleapis.com/css2?family=Anton&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+<style type="text/css">
+  /* ── RESET ── */
+  body, #bodyTable, #bodyCell {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
   body {
-    background: #e8e8e8;
-    font-family: 'Barlow', Arial, sans-serif;
-    color: #fff;
-    color-scheme: light;
-  }
-
-  .email-wrapper {
-    max-width: 680px;
-    margin: 0 auto;
-    background: #161616;
-  }
-
-  /* ── HEADER ── */
-  .header {
-    position: relative;
-    overflow: hidden;
-    height: 460px;
-  }
-  .header > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .header-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.72) 100%);
-  }
-  .logo-lockup {
-    position: absolute;
-    top: 40px;
-    left: 40px;
-  }
-  .logo-lockup img {
-    max-height: 100px;
-    max-width: 100px;
-    height: auto;
-    display: block;
-    filter: brightness(0) invert(1);
-  }
-  .header-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 36px 40px;
-  }
-  .header-eyebrow {
-    font-style: normal;
-    font-size: 12px;
-    font-weight: 600;
-    color: #bbb;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .header-title {
-    font-family: 'Anton Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 42px;
-    line-height: 0.95;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-  }
-  .header-title em {
-    font-style: normal;
-    color: #4c769a;
-  }
-
-  /* ── RULE ── */
-  .rule {
-    height: 4px;
-    background: #111;
-  }
-  .rule-thin {
-    height: 1px;
-    background: #ddd;
-    margin: 0 40px;
-  }
-
-  /* ── INTRO ── */
-  .intro {
-    padding: 40px 40px 32px;
-    border-bottom: 1px solid #222;
-  }
-  .intro p {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #ccc;
-    max-width: 560px;
-  }
-  .intro p strong { color: #fff; }
-  .intro p + p { margin-top: 14px; }
-
-  /* ── SECTION HEADER ── */
-  .section-head {
-    padding: 32px 40px 20px;
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-  }
-  .section-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 13px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: #fff;
-    white-space: nowrap;
-  }
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: #333;
-  }
-
-  /* ── FULL IMAGE ── */
-  .full-img {
-    margin: 0 40px;
-    overflow: hidden;
-  }
-  .full-img img {
-    width: 100%;
-    display: block;
-    filter: grayscale(45%) contrast(1.05);
-  }
-  .img-caption {
-    padding: 10px 40px 0;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #888;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-  }
-
-  /* ── TWO-COL GRID ── */
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 20px 40px;
-  }
-  .grid-2 .cell img {
-    width: 100%;
-    display: block;
-    filter: grayscale(45%) contrast(1.05);
-  }
-  .grid-2 .cell .cap {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #666;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-    padding: 6px 0 0;
-  }
-
-  /* ── PULL QUOTE ── */
-  .pull-quote {
-    margin: 32px 40px;
-    padding: 28px 32px;
-    background: #111;
-    color: #fff;
-    border-left: 4px solid #4c769a;
-  }
-  .pull-quote p {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 1.25;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .pull-quote cite {
-    display: block;
-    margin-top: 12px;
-    font-style: normal;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #888;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-  }
-
-  /* ── PRODUCT SECTION ── */
-  .product-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    margin: 0 40px 8px;
-  }
-  .product-img {
-    background: #f5f5f5;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    border: 1px solid #e0e0e0;
-  }
-  .product-img img {
-    width: 100%;
-    display: block;
-  }
-  .product-info {
-    padding: 28px 24px;
-    border: 1px solid #e0e0e0;
-    border-left: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-  }
-  .product-tag {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #4c769a;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-  }
-  .product-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 30px;
-    line-height: 1;
-    text-transform: uppercase;
-    color: #fff;
-    letter-spacing: -0.5px;
-  }
-  .product-model {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    color: #555;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .product-desc {
-    font-size: 13px;
-    line-height: 1.6;
-    color: #999;
-    margin-top: 4px;
-  }
-
-  /* ── IMTS TRADESHOW BLOCK ── */
-  .imts-block {
-    margin: 40px 40px 0;
-    background: #111;
-    border: 1px solid #222;
-    overflow: hidden;
-  }
-  .imts-header {
-    background: #4c769a;
-    border-bottom: none;
-    padding: 18px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .imts-badge {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.8);
-  }
-  .imts-event-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 22px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #fff;
-  }
-  .imts-body {
-    padding: 32px 28px;
-  }
-  .imts-headline {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 64px;
-    line-height: 0.92;
-    text-transform: uppercase;
-    color: #fff;
-    letter-spacing: -1px;
-    margin-bottom: 20px;
-  }
-  .imts-headline em {
-    font-style: normal;
-    color: #4c769a;
-    display: block;
-  }
-  .imts-body p {
-    font-size: 14px;
-    line-height: 1.75;
-    color: #aaa;
-    margin-bottom: 12px;
-    max-width: 520px;
-  }
-  .imts-body p strong {
-    color: #fff;
-  }
-  .imts-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 24px 0;
-  }
-  .imts-detail-item {
-    background: #161616;
-    border: 1px solid #222;
-    padding: 14px 16px;
-  }
-  .imts-detail-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #4c769a;
-    margin-bottom: 4px;
-  }
-  .imts-detail-value {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 16px;
-    color: #fff;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  /* ── ICON CARDS ── */
-  .imts-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin: 0 0 28px;
-    background: #222;
-  }
-  .imts-card {
-    background: #111;
-    padding: 24px 20px;
-  }
-  .imts-card-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 20px;
-    text-transform: uppercase;
-    color: #fff;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-    line-height: 1;
-  }
-  .imts-card-desc {
-    font-size: 12px;
-    color: #777;
-    line-height: 1.55;
-  }
-  .imts-cta-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .imts-btn-primary {
-    display: inline-block;
-    background: #4c769a;
-    color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 14px 28px;
-    text-decoration: none;
-  }
-  .imts-btn-primary:hover {
-    background: #5a89b0;
-  }
-  .imts-note {
-    font-size: 11px;
-    color: #555;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: 'Barlow Condensed', sans-serif;
-  }
-
-  /* ── CTA ── */
-  .cta-block {
-    margin: 32px 40px 40px;
-    padding: 32px;
-    border: 2px solid #fff;
-    text-align: center;
-  }
-  .cta-block h3 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 28px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #fff;
-    margin-bottom: 10px;
-  }
-  .cta-block p {
-    font-size: 14px;
-    color: #999;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  .cta-btn {
-    display: inline-block;
-    background: #4c769a;
-    color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 14px 36px;
-    text-decoration: none;
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    background: #111;
-    padding: 36px 40px;
-    text-align: center;
-  }
-  .footer-socials {
-    margin-bottom: 20px;
-    text-align: center;
-    filter: brightness(0) invert(1);
-  }
-  .footer-socials a {
-    display: inline-block;
-    margin: 0 8px;
-    text-decoration: none;
-    opacity: 0.6;
-  }
-  .footer-socials a:hover {
-    opacity: 1;
-  }
-  .footer-socials img {
-    width: 22px;
-    height: 22px;
-    display: block;
+    background-color: #e8e8e8 !important;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+  }
+  img {
     border: 0;
+    outline: none;
+    text-decoration: none;
+    -ms-interpolation-mode: bicubic;
+    display: block;
   }
-  .footer .logo-name-footer {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 18px;
-    color: #fff;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .footer-address {
-    font-size: 11px;
-    color: #555;
-    letter-spacing: 0.5px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-  }
-  .footer p {
-    font-size: 11px;
-    color: #555;
-    letter-spacing: 1px;
-    line-height: 1.8;
-  }
-  .footer a { color: #777; text-decoration: none; }
+  a { text-decoration: none; color: inherit; }
+  table { border-collapse: collapse !important; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; }
+  td { border-collapse: collapse !important; }
 
-  /* ── SPACERS ── */
-  .spacer-sm { height: 12px; }
-  .spacer-md { height: 24px; }
-
-  /* ── MOBILE ── */
-  @media (max-width: 600px) {
-    .product-row {
-      grid-template-columns: 1fr;
-    }
-    .product-img {
-      border: 1px solid #e0e0e0;
-    }
-    .product-info {
-      border: 1px solid #e0e0e0;
-      border-top: none;
-    }
-    .imts-details {
-      grid-template-columns: 1fr;
-    }
-    .imts-cards {
-      grid-template-columns: 1fr;
-    }
-    .imts-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-    }
-    .imts-cta-row {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .imts-headline {
-      font-size: 48px;
-    }
+  /* ── RESPONSIVE ── */
+  @media only screen and (max-width: 620px) {
+    .email-wrapper { width: 100% !important; max-width: 100% !important; }
+    .mobile-full { width: 100% !important; display: block !important; }
+    .mobile-hidden { display: none !important; max-height: 0 !important; overflow: hidden !important; }
+    .mobile-pad { padding-left: 20px !important; padding-right: 20px !important; }
+    .mobile-pad-sm { padding-left: 16px !important; padding-right: 16px !important; }
+    .header-title-font { font-size: 30px !important; line-height: 1.05 !important; }
+    .header-logo { max-height: 64px !important; max-width: 64px !important; }
+    .two-col-cell { width: 100% !important; display: block !important; }
+    .two-col-img { width: 100% !important; height: auto !important; }
+    .product-img-cell { width: 100% !important; display: block !important; padding: 0 !important; }
+    .product-info-cell { width: 100% !important; display: block !important; border-left: 1px solid #333 !important; border-top: none !important; }
+    .imts-headline-font { font-size: 44px !important; line-height: 0.95 !important; }
+    .imts-col { width: 100% !important; display: block !important; }
+    .detail-cell { width: 100% !important; display: block !important; margin-bottom: 8px !important; }
+    .footer-pad { padding-left: 20px !important; padding-right: 20px !important; }
   }
 </style>
 </head>
-<body>
-<div class="email-wrapper">
+<body style="margin:0; padding:0; background-color:#e8e8e8; font-family:Arial,sans-serif; color:#ffffff; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
 
-  <div class="header">
-    <img src="https://i.imgur.com/0fcW3EM.png" alt="Aeroex Mist-Fit MF-550 at Hacksmith Industries">
-    <div class="header-overlay"></div>
-    <div class="logo-lockup">
-      <a href="https://aeroex.com/" target="_blank"><img src="https://i.imgur.com/mx3a37z.png" alt="Aeroex Technologies Inc. Logo"></a>
-    </div>
-    <div class="header-content">
-      <div class="header-eyebrow">Engineering Clearer Air:</div>
-      <div class="header-title"><a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">Aeroex</a> Teams Up with <a href="https://www.hacksmith.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><em> Hacksmith Industries</em></a></div>
-    </div>
-  </div>
-  <div class="rule"></div>
+<!-- OUTER WRAPPER -->
+<table id="bodyTable" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#e8e8e8; margin:0; padding:0;">
+<tr>
+<td align="center" valign="top" style="padding:0;">
 
-  <div class="intro">
-    <p>
-      <a href="https://www.hacksmith.com/" target="_blank" style="text-decoration: none;"><strong>Hacksmith Industries</strong></a> has earned a global reputation for turning the iconic gadgets of comics, movies and video games into real-world engineering marvels. But as production grew to include several CNC machines running up to 16 hours a day, atomized coolant mist created excessive humidity and poor air quality throughout the shop.
-    </p>
-    <p>
-    To protect their team and reduce the strain on their HVAC systems,  <a href="https://www.hacksmith.com/" target="_blank" style="text-decoration: none;">
-      <strong>Hacksmith</strong></a> partnered with <a href="https://aeroex.com/" target="_blank" style="text-decoration: none;"><strong>Aeroex Technologies</strong></a> to implement a targeted source-capture solution. Recently, <a href="https://aeroex.com/products/mf-550/" target="_blank" style="text-decoration: none;"><strong>20 Aeroex Mist-Fit MF-550</strong></a> mist collectors were installed on Hacksmith's CNC machines, while a <a href="https://aeroex.com/products/bb-400/" target="_blank" style="text-decoration: none;"><strong>BlowBox BB-400</strong></a> provides a dedicated blow-off station for cleaning parts safely and efficiently.
-    </p>
-    <p>
-      At <a href="https://aeroex.com/" target="_blank" style="text-decoration: none;"><strong>Aeroex</strong></a>, we're laser-focused on creating cleaner, healthier and safer manufacturing environments. The results at Hacksmith speak for themselves: <strong>improved air quality</strong>, <strong>better working conditions</strong> and a <strong>workspace built to support innovation</strong>.
+<!-- EMAIL WRAPPER: 680px -->
+<table class="email-wrapper" border="0" cellpadding="0" cellspacing="0" width="680" style="max-width:680px; background-color:#161616;">
 
-  </div>
+  <!-- ═══════════════════════════════════════
+       HEADER — logo + title above image
+       Uses VML background for Outlook,
+       standard img for other clients
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:0; margin:0;">
 
-  <div class="section-head">
-    <span class="section-label">The Tailored Solution</span>
-    <div class="section-line"></div>
-  </div>
+      <!--[if gte mso 9]>
+      <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false"
+        style="width:680px; height:460px; display:inline-block; position:relative;">
+        <v:fill type="frame" src="https://i.imgur.com/0fcW3EM.png" color="#ffffff"/>
+        <v:textbox inset="0,0,0,0">
+      <![endif]-->
 
-  <div class="full-img">
-    <img src="https://i.imgur.com/CVkMqPM.png" alt="Mist-Fit MF-550 mounted on Haas CNC">
-  </div>
-  <div class="img-caption">Preparing to mount a <a href="https://aeroex.com/products/mf-550/" style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">Mist-Fit MF-550</a></div>
+      <!-- HEADER TABLE (visible to all clients; Outlook wraps in VML) -->
+      <table border="0" cellpadding="0" cellspacing="0" width="680"
+             style="max-width:680px; background-image:url('https://i.imgur.com/0fcW3EM.png'); background-size:cover; background-position:center center; background-color:#2a3a4a; min-height:460px;">
+        <tr>
+          <td style="padding:0; background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.72) 100%); min-height:460px;">
 
-  <div class="spacer-md"></div>
+            <!-- Logo row -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="padding:32px 40px 0 40px;" class="mobile-pad">
+                  <a href="https://aeroex.com/" target="_blank">
+                    <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Aeroex%20Tech_White_Transparent.png"
+                         alt="Aeroex Technologies Inc. Logo"
+                         class="header-logo"
+                         width="80" height="80"
+                         style="max-height:80px; max-width:80px; width:80px; height:auto; display:block; filter:brightness(0) invert(1); ">
+                  </a>
+                </td>
+              </tr>
+            </table>
 
-  <div class="grid-2">
-    <div class="cell">
-      <img src="https://i.imgur.com/UhoknWE.png" alt="Aeroex technician installing mounting plate">
-      <div class="cap">Mounting plate prep</div>
-    </div>
-    <div class="cell">
-      <img src="https://i.imgur.com/1OagRsA.png" alt="Team securing the Mist-Fit unit">
-      <div class="cap"><a href="https://aeroex.com/products/mf-550/" style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">MF-550</a> unit on top of a CNC machine at Hacksmith. </div>
-    </div>
-  </div>
+            <!-- Spacer pushes content down -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr><td height="180" style="line-height:180px; font-size:180px;">&nbsp;</td></tr>
+            </table>
 
-  <div class="grid-2">
-    <div class="cell">
-      <img src="https://i.imgur.com/wDvdIV8.png" alt="Full row of installed Mist-Fit units">
-      <div class="cap">Row of <a href="https://aeroex.com/products/mf-550/" style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">MF-550</a> units installed</div>
-    </div>
-    <div class="cell">
-      <img src="https://i.imgur.com/YnN2j8I.png" alt="Aeroex tech on top of Haas machine during install">
-      <div class="cap">Commissioning on-site</div>
-    </div>
-  </div>
+            <!-- Eyebrow + Title -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="padding:0 40px 36px 40px;" class="mobile-pad">
+                  <p style="margin:0 0 8px 0; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; color:#bbbbbb; letter-spacing:4px; text-transform:uppercase;">
+                    Engineering Clearer Air:
+                  </p>
+                  <p class="header-title-font" style="margin:0; font-family:Arial,sans-serif; font-weight:900; font-size:40px; line-height:0.95; color:#ffffff; text-transform:uppercase; letter-spacing:-1px;">
+                    <a href="https://aeroex.com/" style="text-decoration:none; color:#ffffff;">AEROEX</a>
+                    TEAMS UP WITH
+                    <a href="https://www.hacksmith.com/" style="text-decoration:none; color:#4c769a;">HACKSMITH INDUSTRIES</a>
+                  </p>
+                </td>
+              </tr>
+            </table>
 
-  <div class="pull-quote">
-    <a href="https://www.youtube.com/watch?v=yPhl6qX-uQw" style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><p>"Five minutes later with the fan running, and we're back into the green... If you ever move the machine, you just move the machine. You don't have to worry about changing ductwork."</p></a>
-    <a href="https://www.hacksmith.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><cite>— The Hacksmith Team</cite></a>
-  </div>
+          </td>
+        </tr>
+      </table>
 
-  <div class="grid-2">
-    <div class="cell">
-      <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/MF-550%20in%20operation.png" alt="Mist-Fit MF-550 close-up on CNC machine">
-      <div class="cap"><a href="https://aeroex.com/products/mf-550/" style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">
-        MF-550</a> in operation</div>
-    </div>
-    <div class="cell">
-      <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/BlowBox%20BB-400%20unboxing.webp" alt="BlowBox BB-400 being unboxed at Hacksmith">
-      <div class="cap"><a href="https://aeroex.com/products/bb-400/" style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">BlowBox BB-400</a> unboxing</div>
-    </div>
-  </div>
+      <!--[if gte mso 9]>
+        </v:textbox>
+      </v:rect>
+      <![endif]-->
 
-  <div class="spacer-md"></div>
-  <div class="full-img">
-    <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/BlowBox%20BB-400%20in%20use%20at%20Hacksmith%20shop.png" alt="BlowBox BB-400 in use at Hacksmith shop">
-  </div>
-  <div class="img-caption"><a href="https://aeroex.com/products/bb-400/" style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">BlowBox BB-400</a> — Integrated into the Hacksmith production floor</div>
-  <div class="intro">
-  <p>
-    We're proud to partner with <a href="https://www.hacksmith.com/" target="_blank" style="text-decoration: none;"><strong>Hacksmith Industries</strong></a> and excited about what the future holds. This collaboration is just the beginning, and we look forward to building on our success together for many years to come.
-  </p>
-  </div>
+    </td>
+  </tr>
 
-  <!-- PRODUCT SECTION -->
-  <div class="section-head">
-    <span class="section-label">Our Products</span>
-    <div class="section-line"></div>
-  </div>
+  <!-- RULE -->
+  <tr>
+    <td height="4" style="background-color:#111111; line-height:4px; font-size:4px;">&nbsp;</td>
+  </tr>
 
-  <div class="product-row">
-    <a href="https://aeroex.com/product-categories/mist-fit/" target="_blank" style="text-decoration: none;"><div class="product-img">
-      <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Product-Hacksmith-CNC-with-Mist-Fit-550.png" alt="Aeroex Mist-Fit MF-550">
-    </div>
-    <div class="product-info">
-      <div class="product-tag">MIST COLLECTION</div>
-        <div class="product-name">Mist-Fit</div></a>
-      <div class="product-desc">
-        Mounts directly to your machine—no floor space required, no remote ducting. Multi-stage filtration with long-life fibrebed filters, engineered for reliable, continuous operation.
-      </div>
-    </div>
-  </div>
-
-  <div class="spacer-sm"></div>
-
-  <div class="product-row">
-    <a href="https://aeroex.com/product-categories/maverick/" target="_blank" style="text-decoration: none;"><div class="product-img">
-      <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Maverick%20Mav-2000.png" alt="Aeroex Mav-2500">
-    </div>
-    <div class="product-info">
-      <div class="product-tag">MIST COLLECTION</div>
-      <div class="product-name">MAVERICK</div></a>
-      <div class="product-desc">
-        Advanced multi-stage fibrebed and HEPA filtration paired with intelligent monitoring—engineered for the most demanding environments.
-      </div>
-    </div>
-  </div>
-
-  <div class="spacer-sm"></div>
-
-  <div class="product-row">
-     <a href="https://aeroex.com/products/aro-x/" target="_blank" style="text-decoration: none;"><div class="product-img">
-      <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Aeroex-Aro-x-Product-Picture.png" alt="Aeroex ARO-X">
-    </div>
-    <div class="product-info">
-      <div class="product-tag">ENGINEERED AND SPECIALIZED </div>
-      <div class="product-name">ARO-X</div></a>
-      <div class="product-desc">
-        Custom-engineered: high airflow, high static pressure, stainless steel, molecular filtration, application-specific builds.
-      </div>
-    </div>
-  </div>
-
-  <div class="spacer-sm"></div>
-
-  <div class="product-row">
-    <a href="https://aeroex.com/product-categories/blow-box/" target="_blank" style="text-decoration: none;"><div class="product-img">
-       <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/BlowBox%20BB-400.png" alt="Aeroex BlowBox BB-400">
-    </div>
-    <div class="product-info">
-      <div class="product-tag">SMOKE AND FUME</div>
-      <div class="product-name">BLOWBOX</div></a>
-      <div class="product-desc">
-        Enclosed blow-off with integrated mist capture. Keeps coolant and chips contained during part cleaning.
-      </div>
-    </div>
-  </div>
-  
-   <div class="spacer-sm"></div>
-
-  <div class="product-row">
-    <a href="https://aeroex.com/products/smoke-x/" target="_blank" style="text-decoration: none;"><div class="product-img"><img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Aeroex-Smoke-X-Product-Picture.png" alt="Aeroex Smoke-X">
-    </div>
-   <div class="product-info">
-      <div class="product-tag">SMOKE AND FUME</div>
-     <div class="product-name">SMOKE-X</div></a>
-      <div class="product-desc">
-        Source-capture and ambient systems for welding fumes, grinding dust, and airborne particulates.
-      </div>
-    </div>
-  </div>
-  
-   <div class="spacer-sm"></div>
-
-  <div class="product-row">
-     <a href="https://aeroex.com/product-categories/air-fit/" target="_blank" style="text-decoration: none;"><div class="product-img">
-      <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Aeroex-Air-fit-product-1.png" alt="Aeroex Air-Fit 500">
-    </div>
-   <div class="product-info">
-      <div class="product-tag">CLEAN AIR ENVIRONMENTS</div>
-     <div class="product-name">AIR-FIT</div></a>
-      <div class="product-desc">
-        Create cleanroom conditions within your facility. Recirculating filtration designed for controlled, validated environments.
-      </div>
-    </div>
-  </div>
-
-  <!-- IMTS TRADESHOW SECTION -->
-  <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><div class="imts-block">
-    <div class="imts-header">
-      <span class="imts-badge">You're Invited · Chicago 2026</span>
-      <span class="imts-event-name">IMTS 2026</span>
-    </div></a>
-    <div class="imts-body">
-      <div class="imts-headline">Aeroex will be at<br><a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><em>IMTS 2026</em></a></div>
-      <p>
-        <a href="https://www.imts.com/" target="_blank" style="text-decoration: none;"><strong>IMTS 2026:</strong></a> <a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">
-        Aeroex</a> to Showcase Engineered Clean Air Solutions at North America’s Premier Manufacturing Event.
+  <!-- ═══════════════════════════════════════
+       INTRO
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:40px 40px 32px 40px; border-bottom:1px solid #222222;" class="mobile-pad">
+      <p style="margin:0 0 14px 0; font-family:Arial,sans-serif; font-size:16px; line-height:1.7; color:#cccccc; max-width:560px;">
+        <a href="https://www.hacksmith.com/" target="_blank" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">Hacksmith Industries</strong></a> has earned a global reputation for turning the iconic gadgets of comics, movies and video games into real-world engineering marvels. But as production grew to include several CNC machines running up to 16 hours a day, atomized coolant mist created excessive humidity and poor air quality throughout the shop.
       </p>
-      <p>
-      <p>
-        <a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><strong>Aeroex</strong></a> is heading to the <a href="https://www.imts.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><strong>International Manufacturing Technology Show (IMTS) 2026</strong></a>, the largest manufacturing event in the Western Hemisphere, and we invite attendees to visit us at <strong>Booth 135684</strong> at <strong>McCormick Place in Chicago this September.</strong>
+      <p style="margin:0 0 14px 0; font-family:Arial,sans-serif; font-size:16px; line-height:1.7; color:#cccccc; max-width:560px;">
+        To protect their team and reduce the strain on their HVAC systems, <a href="https://www.hacksmith.com/" target="_blank" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">Hacksmith</strong></a> partnered with <a href="https://aeroex.com/" target="_blank" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">Aeroex Technologies</strong></a> to implement a targeted source-capture solution. Recently, <a href="https://aeroex.com/products/mf-550/" target="_blank" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">20 Aeroex Mist-Fit MF-550</strong></a> mist collectors were installed on Hacksmith's CNC machines, while a <a href="https://aeroex.com/products/bb-400/" target="_blank" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">BlowBox BB-400</strong></a> provides a dedicated blow-off station for cleaning parts safely and efficiently.
       </p>
+      <p style="margin:0; font-family:Arial,sans-serif; font-size:16px; line-height:1.7; color:#cccccc; max-width:560px;">
+        At <a href="https://aeroex.com/" target="_blank" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">Aeroex</strong></a>, we're laser-focused on creating cleaner, healthier and safer manufacturing environments. The results at Hacksmith speak for themselves: <strong style="color:#ffffff;">improved air quality</strong>, <strong style="color:#ffffff;">better working conditions</strong> and a <strong style="color:#ffffff;">workspace built to support innovation</strong>.
       </p>
-      <p>
-        With thousands of manufacturing professionals, <a href="https://www.imts.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><strong>IMTS</strong></a> is where the industry's latest innovations in automation, machining, robotics and advanced manufacturing take centre stage. Aeroex is proud to be part of this global event.
+    </td>
+  </tr>
+
+  <!-- ═══════════════════════════════════════
+       SECTION HEADER — The Tailored Solution
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:32px 40px 20px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td style="font-family:Arial,sans-serif; font-size:13px; font-weight:bold; letter-spacing:4px; text-transform:uppercase; color:#ffffff; white-space:nowrap; padding-right:16px; width:1%;">
+            THE TAILORED SOLUTION
+          </td>
+          <td style="border-top:1px solid #333333;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Full Image -->
+  <tr>
+    <td style="padding:0 40px;" class="mobile-pad">
+      <img src="https://i.imgur.com/CVkMqPM.png"
+           alt="Mist-Fit MF-550 mounted on Haas CNC"
+           width="600"
+           style="width:100%; max-width:600px; height:auto; display:block;">
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 40px 0 40px; font-family:Arial,sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#888888; font-weight:bold;" class="mobile-pad">
+      <a href="https://aeroex.com/products/mf-550/" style="color:#888888; text-decoration:none;">Preparing to mount a Mist-Fit MF-550</a>
+    </td>
+  </tr>
+
+  <!-- Spacer -->
+  <tr><td height="24" style="line-height:24px; font-size:24px;">&nbsp;</td></tr>
+
+  <!-- ═══════════════════════════════════════
+       TWO-COL GRID — Row 1
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:0 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <!-- Cell 1 -->
+          <td class="two-col-cell" valign="top" width="49%" style="padding-right:8px;">
+            <img src="https://i.imgur.com/UhoknWE.png"
+                 alt="Aeroex technician installing mounting plate"
+                 class="two-col-img"
+                 width="292"
+                 style="width:100%; height:auto; display:block;">
+            <p style="margin:6px 0 0 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666666; font-weight:bold;">
+              Mounting plate prep
+            </p>
+          </td>
+          <!-- Spacer column (hidden on mobile via width trick) -->
+          <td width="2%" style="font-size:0; line-height:0;">&nbsp;</td>
+          <!-- Cell 2 -->
+          <td class="two-col-cell" valign="top" width="49%" style="padding-left:8px;">
+            <img src="https://i.imgur.com/1OagRsA.png"
+                 alt="Team securing the Mist-Fit unit"
+                 class="two-col-img"
+                 width="292"
+                 style="width:100%; height:auto; display:block;">
+            <p style="margin:6px 0 0 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666666; font-weight:bold;">
+              <a href="https://aeroex.com/products/mf-550/" style="color:#666666; text-decoration:none;">MF-550</a> unit on top of a CNC machine at Hacksmith.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Spacer -->
+  <tr><td height="16" style="line-height:16px; font-size:16px;">&nbsp;</td></tr>
+
+  <!-- ═══════════════════════════════════════
+       TWO-COL GRID — Row 2
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:0 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td class="two-col-cell" valign="top" width="49%" style="padding-right:8px;">
+            <img src="https://i.imgur.com/wDvdIV8.png"
+                 alt="Full row of installed Mist-Fit units"
+                 class="two-col-img"
+                 width="292"
+                 style="width:100%; height:auto; display:block;">
+            <p style="margin:6px 0 0 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666666; font-weight:bold;">
+              Row of <a href="https://aeroex.com/products/mf-550/" style="color:#666666; text-decoration:none;">MF-550</a> units installed
+            </p>
+          </td>
+          <td width="2%" style="font-size:0; line-height:0;">&nbsp;</td>
+          <td class="two-col-cell" valign="top" width="49%" style="padding-left:8px;">
+            <img src="https://i.imgur.com/YnN2j8I.png"
+                 alt="Aeroex tech on top of Haas machine during install"
+                 class="two-col-img"
+                 width="292"
+                 style="width:100%; height:auto; display:block;">
+            <p style="margin:6px 0 0 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666666; font-weight:bold;">
+              Commissioning on-site
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ═══════════════════════════════════════
+       PULL QUOTE
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:32px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <!-- Left accent bar -->
+          <td width="4" bgcolor="#4c769a" style="background-color:#4c769a; width:4px;">&nbsp;</td>
+          <td style="padding:28px 32px; background-color:#111111;">
+            <a href="https://www.youtube.com/watch?v=yPhl6qX-uQw" target="_blank" style="text-decoration:none;">
+              <p style="margin:0; font-family:Arial,sans-serif; font-size:24px; font-weight:bold; line-height:1.25; text-transform:uppercase; letter-spacing:0.5px; color:#ffffff;">
+                &ldquo;Five minutes later with the fan running, and we&rsquo;re back into the green&hellip; If you ever move the machine, you just move the machine. You don&rsquo;t have to worry about changing ductwork.&rdquo;
+              </p>
+            </a>
+            <p style="margin:12px 0 0 0; font-family:Arial,sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#888888; font-weight:bold;">
+              <a href="https://www.hacksmith.com/" style="color:#888888; text-decoration:none;">— The Hacksmith Team</a>
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ═══════════════════════════════════════
+       TWO-COL GRID — Row 3 (MF-550 + BlowBox)
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:0 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td class="two-col-cell" valign="top" width="49%" style="padding-right:8px;">
+            <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/MF-550%20in%20operation.png"
+                 alt="Mist-Fit MF-550 close-up on CNC machine"
+                 class="two-col-img"
+                 width="292"
+                 style="width:100%; height:auto; display:block;">
+            <p style="margin:6px 0 0 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666666; font-weight:bold;">
+              <a href="https://aeroex.com/products/mf-550/" style="color:#666666; text-decoration:none;">MF-550</a> in operation
+            </p>
+          </td>
+          <td width="2%" style="font-size:0; line-height:0;">&nbsp;</td>
+          <td class="two-col-cell" valign="top" width="49%" style="padding-left:8px;">
+            <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/BlowBox%20BB-400%20unboxing.webp"
+                 alt="BlowBox BB-400 being unboxed at Hacksmith"
+                 class="two-col-img"
+                 width="292"
+                 style="width:100%; height:auto; display:block;">
+            <p style="margin:6px 0 0 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666666; font-weight:bold;">
+              <a href="https://aeroex.com/products/bb-400/" style="color:#666666; text-decoration:none;">BlowBox BB-400</a> unboxing
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Spacer -->
+  <tr><td height="24" style="line-height:24px; font-size:24px;">&nbsp;</td></tr>
+
+  <!-- Full Image — BlowBox in use -->
+  <tr>
+    <td style="padding:0 40px;" class="mobile-pad">
+      <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/BlowBox%20BB-400%20in%20use%20at%20Hacksmith%20shop.png"
+           alt="BlowBox BB-400 in use at Hacksmith shop"
+           width="600"
+           style="width:100%; max-width:600px; height:auto; display:block;">
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 40px 0 40px; font-family:Arial,sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#888888; font-weight:bold;" class="mobile-pad">
+      <a href="https://aeroex.com/products/bb-400/" style="color:#888888; text-decoration:none;">BlowBox BB-400</a> — Integrated into the Hacksmith production floor
+    </td>
+  </tr>
+
+  <!-- Closing Intro -->
+  <tr>
+    <td style="padding:32px 40px; border-bottom:1px solid #222222;" class="mobile-pad">
+      <p style="margin:0; font-family:Arial,sans-serif; font-size:16px; line-height:1.7; color:#cccccc; max-width:560px;">
+        We're proud to partner with <a href="https://www.hacksmith.com/" target="_blank" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">Hacksmith Industries</strong></a> and excited about what the future holds. This collaboration is just the beginning, and we look forward to building on our success together for many years to come.
       </p>
-      <p>
-        Stop by our booth to meet the <a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><strong>Aeroex team</strong></a>, explore our innovative product lineup and discover how our engineered clean air solutions are helping manufacturers create safer, cleaner and more productive facilities. Whether you're looking to improve air quality, enhance worker safety or optimize your manufacturing environment, our experts are ready to discuss solutions tailored to your application.
+    </td>
+  </tr>
+
+  <!-- ═══════════════════════════════════════
+       SECTION HEADER — Our Products
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:32px 40px 20px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td style="font-family:Arial,sans-serif; font-size:13px; font-weight:bold; letter-spacing:4px; text-transform:uppercase; color:#ffffff; white-space:nowrap; padding-right:16px; width:1%;">
+            OUR PRODUCTS
+          </td>
+          <td style="border-top:1px solid #333333;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ═══════════════════════════════════════
+       PRODUCT ROW — Mist-Fit
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:0 40px 8px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td class="product-img-cell" valign="top" width="50%" style="background-color:#f5f5f5; border:1px solid #e0e0e0; padding:0; overflow:hidden;">
+            <a href="https://aeroex.com/product-categories/mist-fit/" target="_blank">
+              <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Newsletter%20Images/Aeroex-Mist-Fit-MF-550.png"
+                   alt="Aeroex Mist-Fit MF-550"
+                   width="300"
+                   style="width:100%; height:auto; display:block;">
+            </a>
+          </td>
+          <td class="product-info-cell" valign="middle" width="50%" style="padding:28px 24px; border:1px solid #333333; border-left:none; background-color:#161616;">
+            <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">MIST COLLECTION</p>
+            <a href="https://aeroex.com/product-categories/mist-fit/" target="_blank" style="text-decoration:none;">
+              <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:28px; font-weight:900; line-height:1; text-transform:uppercase; color:#ffffff; letter-spacing:-0.5px;">Mist-Fit</p>
+            </a>
+            <p style="margin:0; font-family:Arial,sans-serif; font-size:13px; line-height:1.6; color:#999999;">
+              Mounts directly to your machine—no floor space required, no remote ducting. Multi-stage filtration with long-life fibrebed filters, engineered for reliable, continuous operation.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- PRODUCT ROW — Maverick -->
+  <tr>
+    <td style="padding:0 40px 8px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td class="product-img-cell" valign="top" width="50%" style="background-color:#f5f5f5; border:1px solid #e0e0e0; padding:0; overflow:hidden;">
+            <a href="https://aeroex.com/product-categories/maverick/" target="_blank">
+              <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Newsletter%20Images/Aeroex-Maverick-Mav-2000-Reduce-File-Size.jpg"
+                   alt="Aeroex Maverick Mav-2500"
+                   width="300"
+                   style="width:100%; height:auto; display:block;">
+            </a>
+          </td>
+          <td class="product-info-cell" valign="middle" width="50%" style="padding:28px 24px; border:1px solid #333333; border-left:none; background-color:#161616;">
+            <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">MIST COLLECTION</p>
+            <a href="https://aeroex.com/product-categories/maverick/" target="_blank" style="text-decoration:none;">
+              <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:28px; font-weight:900; line-height:1; text-transform:uppercase; color:#ffffff; letter-spacing:-0.5px;">MAVERICK</p>
+            </a>
+            <p style="margin:0; font-family:Arial,sans-serif; font-size:13px; line-height:1.6; color:#999999;">
+              Advanced multi-stage fibrebed and HEPA filtration paired with intelligent monitoring—engineered for the most demanding environments.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- PRODUCT ROW — ARO-X -->
+  <tr>
+    <td style="padding:0 40px 8px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td class="product-img-cell" valign="top" width="50%" style="background-color:#f5f5f5; border:1px solid #e0e0e0; padding:0; overflow:hidden;">
+            <a href="https://aeroex.com/products/aro-x/" target="_blank">
+              <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Newsletter%20Images/Aeroex-Aro-X-Reduce-File-Size.jpg"
+                   alt="Aeroex ARO-X"
+                   width="300"
+                   style="width:100%; height:auto; display:block;">
+            </a>
+          </td>
+          <td class="product-info-cell" valign="middle" width="50%" style="padding:28px 24px; border:1px solid #333333; border-left:none; background-color:#161616;">
+            <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">ENGINEERED &amp; SPECIALIZED</p>
+            <a href="https://aeroex.com/products/aro-x/" target="_blank" style="text-decoration:none;">
+              <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:28px; font-weight:900; line-height:1; text-transform:uppercase; color:#ffffff; letter-spacing:-0.5px;">ARO-X</p>
+            </a>
+            <p style="margin:0; font-family:Arial,sans-serif; font-size:13px; line-height:1.6; color:#999999;">
+              Custom-engineered: high airflow, high static pressure, stainless steel, molecular filtration, application-specific builds.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- PRODUCT ROW — BlowBox -->
+  <tr>
+    <td style="padding:0 40px 8px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td class="product-img-cell" valign="top" width="50%" style="background-color:#f5f5f5; border:1px solid #e0e0e0; padding:0; overflow:hidden;">
+            <a href="https://aeroex.com/product-categories/blow-box/" target="_blank">
+              <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Newsletter%20Images/Aeroex-BlowBox-BB-400-Reduce-File-Size.jpg"
+                   alt="Aeroex BlowBox BB-400"
+                   width="300"
+                   style="width:100%; height:auto; display:block;">
+            </a>
+          </td>
+          <td class="product-info-cell" valign="middle" width="50%" style="padding:28px 24px; border:1px solid #333333; border-left:none; background-color:#161616;">
+            <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">SMOKE AND FUME</p>
+            <a href="https://aeroex.com/product-categories/blow-box/" target="_blank" style="text-decoration:none;">
+              <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:28px; font-weight:900; line-height:1; text-transform:uppercase; color:#ffffff; letter-spacing:-0.5px;">BLOWBOX</p>
+            </a>
+            <p style="margin:0; font-family:Arial,sans-serif; font-size:13px; line-height:1.6; color:#999999;">
+              Enclosed blow-off with integrated mist capture. Keeps coolant and chips contained during part cleaning.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- PRODUCT ROW — Smoke-X -->
+  <tr>
+    <td style="padding:0 40px 8px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td class="product-img-cell" valign="top" width="50%" style="background-color:#f5f5f5; border:1px solid #e0e0e0; padding:0; overflow:hidden;">
+            <a href="https://aeroex.com/products/smoke-x/" target="_blank">
+              <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Newsletter%20Images/Aeroex-Smoke-X.png"
+                   alt="Aeroex Smoke-X"
+                   width="300"
+                   style="width:100%; height:auto; display:block;">
+            </a>
+          </td>
+          <td class="product-info-cell" valign="middle" width="50%" style="padding:28px 24px; border:1px solid #333333; border-left:none; background-color:#161616;">
+            <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">SMOKE AND FUME</p>
+            <a href="https://aeroex.com/products/smoke-x/" target="_blank" style="text-decoration:none;">
+              <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:28px; font-weight:900; line-height:1; text-transform:uppercase; color:#ffffff; letter-spacing:-0.5px;">SMOKE-X</p>
+            </a>
+            <p style="margin:0; font-family:Arial,sans-serif; font-size:13px; line-height:1.6; color:#999999;">
+              Source-capture and ambient systems for welding fumes, grinding dust, and airborne particulates.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- PRODUCT ROW — Air-Fit -->
+  <tr>
+    <td style="padding:0 40px 8px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td class="product-img-cell" valign="top" width="50%" style="background-color:#f5f5f5; border:1px solid #e0e0e0; padding:0; overflow:hidden;">
+            <a href="https://aeroex.com/product-categories/air-fit/" target="_blank">
+              <img src="https://raw.githubusercontent.com/asayago-creator/Aeroex/refs/heads/main/Newsletter%20Images/Aeroex-Air-Fit.png"
+                   alt="Aeroex Air-Fit 500"
+                   width="300"
+                   style="width:100%; height:auto; display:block;">
+            </a>
+          </td>
+          <td class="product-info-cell" valign="middle" width="50%" style="padding:28px 24px; border:1px solid #333333; border-left:none; background-color:#161616;">
+            <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">CLEAN AIR ENVIRONMENTS</p>
+            <a href="https://aeroex.com/product-categories/air-fit/" target="_blank" style="text-decoration:none;">
+              <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:28px; font-weight:900; line-height:1; text-transform:uppercase; color:#ffffff; letter-spacing:-0.5px;">AIR-FIT</p>
+            </a>
+            <p style="margin:0; font-family:Arial,sans-serif; font-size:13px; line-height:1.6; color:#999999;">
+              Create cleanroom conditions within your facility. Recirculating filtration designed for controlled, validated environments.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ═══════════════════════════════════════
+       IMTS BLOCK
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:40px 40px 0 40px;" class="mobile-pad">
+
+      <!-- IMTS Container -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#111111; border:1px solid #222222;">
+
+        <!-- IMTS Header Bar -->
+        <tr>
+          <td style="background-color:#4c769a; padding:18px 28px;">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago" style="text-decoration:none;">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="font-family:Arial,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.8);">
+                    YOU'RE INVITED &middot; CHICAGO 2026
+                  </td>
+                  <td align="right" style="font-family:Arial,sans-serif; font-size:20px; font-weight:900; letter-spacing:2px; text-transform:uppercase; color:#ffffff;">
+                    IMTS 2026
+                  </td>
+                </tr>
+              </table>
+            </a>
+          </td>
+        </tr>
+
+        <!-- IMTS Body -->
+        <tr>
+          <td style="padding:32px 28px;" class="mobile-pad-sm">
+
+            <!-- Big Headline -->
+            <p class="imts-headline-font" style="margin:0 0 20px 0; font-family:Arial,sans-serif; font-size:60px; font-weight:900; line-height:0.92; text-transform:uppercase; color:#ffffff; letter-spacing:-1px;">
+              AEROEX WILL BE AT<br>
+              <a href="https://aeroex.com/" style="color:#4c769a; text-decoration:none;">IMTS 2026</a>
+            </p>
+
+            <p style="margin:0 0 12px 0; font-family:Arial,sans-serif; font-size:14px; line-height:1.75; color:#aaaaaa; max-width:520px;">
+              <a href="https://www.imts.com/" target="_blank" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">IMTS 2026:</strong></a> <a href="https://aeroex.com/" style="color:#aaaaaa; text-decoration:none;">Aeroex</a> to Showcase Engineered Clean Air Solutions at North America's Premier Manufacturing Event.
+            </p>
+            <p style="margin:0 0 12px 0; font-family:Arial,sans-serif; font-size:14px; line-height:1.75; color:#aaaaaa; max-width:520px;">
+              <a href="https://aeroex.com/" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">Aeroex</strong></a> is heading to the <a href="https://www.imts.com/" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">International Manufacturing Technology Show (IMTS) 2026</strong></a>, the largest manufacturing event in the Western Hemisphere, and we invite attendees to visit us at <strong style="color:#ffffff;">Booth 135684</strong> at <strong style="color:#ffffff;">McCormick Place in Chicago this September.</strong>
+            </p>
+            <p style="margin:0 0 12px 0; font-family:Arial,sans-serif; font-size:14px; line-height:1.75; color:#aaaaaa; max-width:520px;">
+              With thousands of manufacturing professionals, <a href="https://www.imts.com/" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">IMTS</strong></a> is where the industry's latest innovations in automation, machining, robotics and advanced manufacturing take centre stage. Aeroex is proud to be part of this global event.
+            </p>
+            <p style="margin:0 0 12px 0; font-family:Arial,sans-serif; font-size:14px; line-height:1.75; color:#aaaaaa; max-width:520px;">
+              Stop by our booth to meet the <a href="https://aeroex.com/" style="color:#aaaaaa; text-decoration:none;"><strong style="color:#ffffff;">Aeroex team</strong></a>, explore our innovative product lineup and discover how our engineered clean air solutions are helping manufacturers create safer, cleaner and more productive facilities.
+            </p>
+            <p style="margin:0 0 24px 0; font-family:Arial,sans-serif; font-size:14px; line-height:1.75; color:#aaaaaa; max-width:520px;">
+              From mist and smoke collection to advanced air filtration systems, <a href="https://aeroex.com/" style="color:#aaaaaa; text-decoration:none;">Aeroex</a> continues to raise the bar in industrial air quality management, delivering reliable, high-performance solutions <strong style="color:#ffffff;">trusted by manufacturers across North America</strong>.
+            </p>
+
+            <!-- Detail Grid (2-col) -->
+            <table border="0" cellpadding="0" cellspacing="8" width="100%" style="margin:0 0 24px 0;">
+              <tr>
+                <td class="detail-cell" valign="top" width="48%" style="background-color:#161616; border:1px solid #222222; padding:14px 16px;">
+                  <a href="https://www.imts.com/" style="text-decoration:none;">
+                    <p style="margin:0 0 4px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">EVENT</p>
+                    <p style="margin:0; font-family:Arial,sans-serif; font-size:15px; font-weight:900; color:#ffffff; letter-spacing:0.5px; text-transform:uppercase;">IMTS 2026</p>
+                  </a>
+                </td>
+                <td width="4%" style="font-size:0; line-height:0;">&nbsp;</td>
+                <td class="detail-cell" valign="top" width="48%" style="background-color:#161616; border:1px solid #222222; padding:14px 16px;">
+                  <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago" style="text-decoration:none;">
+                    <p style="margin:0 0 4px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">DATES</p>
+                    <p style="margin:0; font-family:Arial,sans-serif; font-size:15px; font-weight:900; color:#ffffff; letter-spacing:0.5px; text-transform:uppercase;">SEPT 14&ndash;19, 2026</p>
+                  </a>
+                </td>
+              </tr>
+              <tr><td colspan="3" height="8" style="line-height:8px; font-size:8px;">&nbsp;</td></tr>
+              <tr>
+                <td class="detail-cell" valign="top" width="48%" style="background-color:#161616; border:1px solid #222222; padding:14px 16px;">
+                  <p style="margin:0 0 4px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">BOOTH</p>
+                  <p style="margin:0; font-family:Arial,sans-serif; font-size:15px; font-weight:900; color:#ffffff; letter-spacing:0.5px; text-transform:uppercase;">#135684</p>
+                </td>
+                <td width="4%" style="font-size:0; line-height:0;">&nbsp;</td>
+                <td class="detail-cell" valign="top" width="48%" style="background-color:#161616; border:1px solid #222222; padding:14px 16px;">
+                  <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago" style="text-decoration:none;">
+                    <p style="margin:0 0 4px 0; font-family:Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#4c769a; font-weight:bold;">VENUE</p>
+                    <p style="margin:0; font-family:Arial,sans-serif; font-size:15px; font-weight:900; color:#ffffff; letter-spacing:0.5px; text-transform:uppercase;">McCormick Place, Chicago</p>
+                  </a>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Icon Cards (2-col, 3 rows) -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 28px 0;">
+
+              <!-- Card Row 1 -->
+              <tr>
+                <td class="imts-col" valign="top" width="50%" style="background-color:#111111; padding:24px 20px; border-right:2px solid #222222; border-bottom:2px solid #222222;">
+                  <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:18px; font-weight:900; text-transform:uppercase; color:#ffffff; letter-spacing:0.5px; line-height:1;">Watch It Work Live</p>
+                  <p style="margin:0; font-family:Arial,sans-serif; font-size:12px; color:#777777; line-height:1.55;">See Aeroex units running on actual CNC setups under real cutting conditions — no video loops, no staged environments.</p>
+                </td>
+                <td class="imts-col" valign="top" width="50%" style="background-color:#111111; padding:24px 20px; border-bottom:2px solid #222222;">
+                  <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:18px; font-weight:900; text-transform:uppercase; color:#ffffff; letter-spacing:0.5px; line-height:1;">Test It Yourself</p>
+                  <p style="margin:0; font-family:Arial,sans-serif; font-size:12px; color:#777777; line-height:1.55;">Get hands-on with the equipment and experience the difference in air quality firsthand before you commit.</p>
+                </td>
+              </tr>
+              <!-- Card Row 2 -->
+              <tr>
+                <td class="imts-col" valign="top" width="50%" style="background-color:#111111; padding:24px 20px; border-right:2px solid #222222; border-bottom:2px solid #222222;">
+                  <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:18px; font-weight:900; text-transform:uppercase; color:#ffffff; letter-spacing:0.5px; line-height:1;">Talk to Our Experts</p>
+                  <p style="margin:0; font-family:Arial,sans-serif; font-size:12px; color:#777777; line-height:1.55;">Sit down with Aeroex engineers and application specialists who know your shop's specific challenges inside out.</p>
+                </td>
+                <td class="imts-col" valign="top" width="50%" style="background-color:#111111; padding:24px 20px; border-bottom:2px solid #222222;">
+                  <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:18px; font-weight:900; text-transform:uppercase; color:#ffffff; letter-spacing:0.5px; line-height:1;">Leave with a Plan</p>
+                  <p style="margin:0; font-family:Arial,sans-serif; font-size:12px; color:#777777; line-height:1.55;">Walk away with practical filtration strategies tailored to your operation that you can implement immediately.</p>
+                </td>
+              </tr>
+              <!-- Card Row 3 -->
+              <tr>
+                <td class="imts-col" valign="top" width="50%" style="background-color:#111111; padding:24px 20px; border-right:2px solid #222222;">
+                  <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:18px; font-weight:900; text-transform:uppercase; color:#ffffff; letter-spacing:0.5px; line-height:1;">Connect with Peers</p>
+                  <p style="margin:0; font-family:Arial,sans-serif; font-size:12px; color:#777777; line-height:1.55;">Meet other shop managers, engineers, and decision-makers who are solving the same air quality problems.</p>
+                </td>
+                <td class="imts-col" valign="top" width="50%" style="background-color:#111111; padding:24px 20px;">
+                  <p style="margin:0 0 6px 0; font-family:Arial,sans-serif; font-size:18px; font-weight:900; text-transform:uppercase; color:#ffffff; letter-spacing:0.5px; line-height:1;">Get Instant Insights</p>
+                  <p style="margin:0; font-family:Arial,sans-serif; font-size:12px; color:#777777; line-height:1.55;">Discover where mist and particulate are costing you in HVAC load, maintenance, and operator health — and how to fix it.</p>
+                </td>
+              </tr>
+
+            </table>
+
+            <p style="margin:0 0 12px 0; font-family:Arial,sans-serif; font-size:14px; line-height:1.75; color:#aaaaaa; max-width:520px;">
+              We look forward to connecting with customers, partners and industry leaders at <a href="https://www.imts.com/" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">IMTS 2026</strong></a>.
+            </p>
+            <p style="margin:0 0 28px 0; font-family:Arial,sans-serif; font-size:14px; line-height:1.75; color:#aaaaaa; max-width:520px;">
+              From <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago" style="color:#ffffff; text-decoration:none;"><strong style="color:#ffffff;">September 14&ndash;19</strong></a>, visit <a href="https://aeroex.com/" style="color:#aaaaaa; text-decoration:none;">Aeroex</a> at Booth 135684 and see why manufacturers are turning to <a href="https://aeroex.com/" style="color:#aaaaaa; text-decoration:none;">Aeroex</a> to set a new standard in engineered clean air solutions. <strong style="color:#ffffff;">We'll see you at <a href="https://www.imts.com/" style="color:#ffffff; text-decoration:none;">IMTS 2026</a> — McCormick Place, Chicago.</strong>
+            </p>
+
+            <!-- CTA Row -->
+            <table border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="padding-right:20px;">
+                  <a href="https://www.imts.com/show/reg.cfm" target="_blank"
+                     style="display:inline-block; background-color:#4c769a; color:#ffffff; font-family:Arial,sans-serif; font-size:13px; font-weight:bold; letter-spacing:3px; text-transform:uppercase; padding:14px 28px; text-decoration:none; -webkit-text-size-adjust:none; mso-hide:none;">
+                    REGISTER TO ATTEND IMTS 2026 &rarr;
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-top:14px; font-family:Arial,sans-serif; font-size:11px; color:#555555; letter-spacing:1px; text-transform:uppercase;">
+                  <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago" style="color:#555555; text-decoration:none;">Add to Calendar</a>
+                  &middot; Find us at Booth #135684
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ═══════════════════════════════════════
+       GENERAL CTA
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td style="padding:32px 40px 40px 40px;" class="mobile-pad">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border:2px solid #ffffff;">
+        <tr>
+          <td align="center" style="padding:32px 24px;">
+            <p style="margin:0 0 10px 0; font-family:Arial,sans-serif; font-size:26px; font-weight:900; text-transform:uppercase; letter-spacing:1px; color:#ffffff; line-height:1.1;">
+              Ready to clean up your shop air?
+            </p>
+            <p style="margin:0 0 20px 0; font-family:Arial,sans-serif; font-size:14px; color:#999999; line-height:1.6; max-width:480px;">
+              Can't make it to <a href="https://www.imts.com/" style="color:#999999; text-decoration:none;">IMTS?</a> We still want to connect. Reach out directly and our team will help you find the right <a href="https://aeroex.com/" style="color:#999999; text-decoration:none;">Aeroex</a> solution for your shop — installation support included.
+            </p>
+            <a href="https://aeroex.com/contact/"
+               style="display:inline-block; background-color:#4c769a; color:#ffffff; font-family:Arial,sans-serif; font-size:14px; font-weight:bold; letter-spacing:3px; text-transform:uppercase; padding:14px 36px; text-decoration:none;">
+              GET IN TOUCH
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <tr>
+    <td align="center" style="background-color:#111111; padding:36px 40px;" class="footer-pad">
+
+      <!-- Social Icons -->
+      <table border="0" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto 20px auto;">
+        <tr>
+          <td style="padding:0 8px;">
+            <a href="https://www.facebook.com/aeroextechnologies" target="_blank">
+              <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png"
+                   alt="Facebook" width="22" height="22"
+                   style="width:22px; height:22px; display:block; border:0; opacity:0.6;">
+            </a>
+          </td>
+          <td style="padding:0 8px;">
+            <a href="https://www.instagram.com/aeroex_technologies/" target="_blank">
+              <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png"
+                   alt="Instagram" width="22" height="22"
+                   style="width:22px; height:22px; display:block; border:0; opacity:0.6;">
+            </a>
+          </td>
+          <td style="padding:0 8px;">
+            <a href="https://www.linkedin.com/company/aeroex/" target="_blank">
+              <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png"
+                   alt="LinkedIn" width="22" height="22"
+                   style="width:22px; height:22px; display:block; border:0; opacity:0.6;">
+            </a>
+          </td>
+          <td style="padding:0 8px;">
+            <a href="https://www.youtube.com/@aeroextechnologiesinc.6652" target="_blank">
+              <img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png"
+                   alt="YouTube" width="22" height="22"
+                   style="width:22px; height:22px; display:block; border:0; opacity:0.6;">
+            </a>
+          </td>
+          <td style="padding:0 8px;">
+            <a href="https://aeroex.com" target="_blank">
+              <img src="https://img.icons8.com/ios-filled/50/ffffff/domain.png"
+                   alt="Website" width="22" height="22"
+                   style="width:22px; height:22px; display:block; border:0; opacity:0.6;">
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Company Name -->
+      <a href="https://aeroex.com/" target="_blank" style="text-decoration:none;">
+        <p style="margin:0 0 4px 0; font-family:Arial,sans-serif; font-size:16px; font-weight:900; color:#ffffff; letter-spacing:5px; text-transform:uppercase;">
+          AEROEX TECHNOLOGIES INC.
+        </p>
+      </a>
+
+      <!-- Address -->
+      <p style="margin:0 0 20px 0; font-family:Arial,sans-serif; font-size:11px; color:#555555; letter-spacing:0.5px; text-transform:uppercase; font-weight:bold;">
+        717 Bayview Dr, L4N9A5, Barrie
       </p>
-     <p>
-        From mist and smoke collection to advanced air filtration systems, <a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">
-       Aeroex</a> continues to raise the bar in industrial air quality management, delivering reliable, high-performance solutions <strong>trusted by manufacturers across North America</strong>.
+
+      <!-- Legal -->
+      <p style="margin:0; font-family:Arial,sans-serif; font-size:11px; color:#555555; letter-spacing:1px; line-height:1.8;">
+        &copy; 2026 Aeroex Technologies Inc. &middot; All rights reserved<br>
+        <a href="{{ unsubscribe }}" style="color:#777777; text-decoration:none;">Unsubscribe</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://aeroex.com/privacy-policy/" target="_blank" style="color:#777777; text-decoration:none;">Privacy Policy</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://aeroex.com" target="_blank" style="color:#777777; text-decoration:none;">aeroex.com</a>
       </p>
-    
-      
 
-      <a href="https://www.imts.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><div class="imts-details">
-        <div class="imts-detail-item">
-          <div class="imts-detail-label">Event</div>
-          <div class="imts-detail-value">IMTS 2026</div>
-        </div></a>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><div class="imts-detail-item">
-          <div class="imts-detail-label">Dates</div>
-          <div class="imts-detail-value">Sept 14–19, 2026</div>
-          </div></a>
-        
-        <div class="imts-detail-item">
-          <div class="imts-detail-label">Booth</div>
-          <div class="imts-detail-value">#135684</div>
-        </div>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">
-        <div class="imts-detail-item">
-          <div class="imts-detail-label">Venue</div>
-          <div class="imts-detail-value">McCormick Place, Chicago</div>
-          </div></a>
-      </div>
+    </td>
+  </tr>
 
-      <div class="imts-cards">
-        <div class="imts-card">
-                    <div class="imts-card-title">Watch It Work Live</div>
-          <div class="imts-card-desc">See Aeroex units running on actual CNC setups under real cutting conditions — no video loops, no staged environments.</div>
-        </div>
-        <div class="imts-card">
-                    <div class="imts-card-title">Test It Yourself</div>
-          <div class="imts-card-desc">Get hands-on with the equipment and experience the difference in air quality firsthand before you commit.</div>
-        </div>
-        <div class="imts-card">
-                    <div class="imts-card-title">Talk to Our Experts</div>
-          <div class="imts-card-desc">Sit down with Aeroex engineers and application specialists who know your shop's specific challenges inside out.</div>
-        </div>
-        <div class="imts-card">
-                    <div class="imts-card-title">Leave with a Plan</div>
-          <div class="imts-card-desc">Walk away with practical filtration strategies tailored to your operation that you can implement immediately.</div>
-        </div>
-        <div class="imts-card">
-                    <div class="imts-card-title">Connect with Peers</div>
-          <div class="imts-card-desc">Meet other shop managers, engineers, and decision-makers who are solving the same air quality problems.</div>
-        </div>
-        <div class="imts-card">
-                    <div class="imts-card-title">Get Instant Insights</div>
-          <div class="imts-card-desc">Discover where mist and particulate are costing you in HVAC load, maintenance, and operator health — and how to fix it.</div>
-        </div>
-      </div>
+</table>
+<!-- END EMAIL WRAPPER -->
 
-      <p>
-       We look forward to connecting with customers, partners and industry leaders at <a href="https://www.imts.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;"><strong>IMTS 2026</strong></a>.
-      </p>
-      <p>
-        From <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">
-<strong>September 14 - 19</strong><a/>, visit <a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">Aeroex</a> at Booth 135684 and see why manufacturers are turning to <a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">Aeroex</a> to set a new standard in engineered clean air solutions. Let's connect, talk through your shop's specific needs, and show you in person why engineers and facility managers across North America trust Aeroex to protect their teams and their machines.
+</td>
+</tr>
+</table>
+<!-- END OUTER WRAPPER -->
 
-        <strong>We'll see you at <a href="https://www.imts.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">IMTS 2026</a> — McCormick Place, Chicago.</strong></p>
-      <div class="spacer-sm"></div>
-      <div class="imts-cta-row">
-        <a href="https://www.imts.com/show/reg.cfm" target="blank" class="imts-btn-primary" style="text-decoration: none;">Register to Attend IMTS 2026 →</a>
-        <span class="imts-note"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20Aeroex%20at%20IMTS%202026%20Chicago!%20Booth%20%23135684&dates=20260914T073000/20260919T170000&details=This%20page%20provides%20official%20details%20about%20IMTS%202026%2C%20including%20event%20information%2C%20schedule%2C%20and%20visitor%20guidance.%0AFor%20registration%20and%20full%20event%20details%2C%20visit%3A%20https%3A%2F%2Fwww.imts.com%2Fshow%2FAboutTheShow.cfm%0ABooth%20%23135684%20%E2%80%93%20Meet%20Aeroex%20at%20IMTS%202026%20at%20McCormick%20Place%2C%20Chicago.&location=McCormick%20Place%2C%20Chicago"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">Add to Calendar</a> · Find us at Booth #135684</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- GENERAL CTA -->
-  <div class="cta-block">
-    <h3>Ready to clean up your shop air?</h3>
-    <p>Can't make it to <a href="https://www.imts.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">IMTS?</a> We still want to connect. Reach out directly and our team will help you find the right <a href="https://aeroex.com/"
-   style="text-decoration:none; background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;">Aeroex</> solution for your shop — installation support included.</p>
-    <a href="https://aeroex.com/contact/" class="cta-btn">Get in Touch</a>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="footer-socials">
-      <a href="https://www.facebook.com/aeroextechnologies" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></a>
-      <a href="https://www.instagram.com/aeroex_technologies/" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
-      <a href="https://www.linkedin.com/company/aeroex/" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn"></a>
-      <a href="https://www.youtube.com/@aeroextechnologiesinc.6652" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
-      <a href="https://aeroex.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/domain.png" alt="Website"></a>
-    </div>
-    <a href="https://aeroex.com/" target="_blank" style="text-decoration: none;"><div class="logo-name-footer">Aeroex Technologies Inc.</div><a/>
-    <div class="footer-address">717 Bayview Dr, L4N9A5, Barrie</div>
-    <p>
-      © 2026 Aeroex Technologies Inc. · All rights reserved<br>
-      <a href="{{ unsubscribe }}">Unsubscribe</a> · <a href="https://aeroex.com/privacy-policy/" target="_blank" style="text-decoration: none;">Privacy Policy</a> · <a href="https://aeroex.com" target="blank" style="text-decoration: none;">aeroex.com</a>
-    </p>
-  </div>
-
-</div>
 </body>
 </html>
